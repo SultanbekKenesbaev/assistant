@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="kaa">
+<head>
+  <meta charset="utf-8"/>
+  <title>Hurliman</title>
+  <link rel="stylesheet" href="/static/styles.css"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+</head>
+<body>
+  <!-- Динамические волны на фоне -->
+  <canvas id="bg-waves" aria-hidden="true"></canvas>
+
+  <main class="shell">
+    <div class="center">
+      <div id="orb" class="orb idle" aria-label="voice status"></div>
+      <div id="status" class="hint">Mikrofon ruxsat soraladı…</div>
+      <div id="last-stt" class="stt-preview"></div>
+      <div id="answer" class="answer"></div>
+    </div>
+  </main>
+
+  <!-- Проигрываем готовые аудио-ответы ассистента -->
+  <audio id="tts-audio" autoplay playsinline></audio>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

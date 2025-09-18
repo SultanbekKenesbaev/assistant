@@ -1,0 +1,137 @@
+:root{
+  /* ПАЛИТРА (можешь править под вкус) */
+  --bg-top: #10182b;      /* верх фона (светлее) */
+  --bg-bot: #0b1220;      /* низ фона */
+  --text:   #eaf0ff;
+  --muted:  #aab6d5;
+
+  /* Цвета состояний круга/волн */
+  --idle:      #5f8cff;   /* ожидание */
+  --listening: #12d39a;   /* пользователь говорит */
+  --speaking:  #be74ff;   /* ассистент говорит */
+
+  --orb-size: min(40vmin, 240px);
+}
+
+/* БАЗА */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 720px at 55% -8%, #1a2750 0%, transparent 50%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-bot));
+  color: var(--text);
+  font: 500 16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", sans-serif;
+  overflow: hidden;
+}
+
+#bg-waves{
+  position: fixed; inset: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0;
+  filter: saturate(118%) brightness(112%);
+}
+
+.shell{
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  position: relative;
+  z-index: 1;
+}
+.center{
+  display: grid;
+  grid-auto-rows: max-content;
+  justify-items: center;
+  gap: 16px;
+}
+
+/* ORB — аккуратный шар с «глянцем» */
+.orb{
+  --color: var(--idle);
+  --level: 0;     /* 0..1 — задаёт JS по громкости пользователя */
+  --glow: 0.45;
+  width: var(--orb-size);
+  height: var(--orb-size);
+  border-radius: 50%;
+  position: relative;
+  background:
+    radial-gradient(60% 60% at 35% 28%, rgba(255,255,255,.30), transparent 55%),
+    radial-gradient(100% 100% at 50% 50%, color-mix(in oklab, var(--color) 30%, #000 70%), color-mix(in oklab, var(--color) 6%, #000 94%));
+  box-shadow:
+    0 0 calc(18px + 36px * var(--level)) color-mix(in oklab, var(--color) 42%, transparent),
+    0 0 calc(30px + 90px * var(--glow)) color-mix(in oklab, var(--color) 26%, transparent);
+  transform: translateZ(0) scale(calc(1 + 0.12 * var(--level)));
+  transition: background .25s ease, box-shadow .12s ease, transform .08s ease;
+  isolation: isolate;
+  will-change: transform, box-shadow;
+}
+
+/* «бегущий блик» — даёт глубину */
+.orb::before{
+  content:"";
+  position:absolute; inset:-2px;
+  border-radius:50%;
+  background:
+    radial-gradient(140% 140% at 20% 15%, rgba(255,255,255,.38), transparent 42%),
+    radial-gradient(120% 120% at 80% 90%, rgba(255,255,255,.06), transparent 60%);
+  mix-blend-mode: screen;
+  opacity:.9;
+  animation: sheen 7.5s linear infinite;
+}
+@keyframes sheen{
+  0%   { transform: rotate(0deg) scale(1.00); }
+  50%  { transform: rotate(180deg) scale(1.005); }
+  100% { transform: rotate(360deg) scale(1.00); }
+}
+
+/* Состояния */
+.orb.idle{      --color: var(--idle);      animation: breathe 3.1s ease-in-out infinite; }
+.orb.listening{ --color: var(--listening); animation: pulse   0.95s ease-out     infinite; }
+.orb.speaking{  --color: var(--speaking);  animation: glow    1.4s  ease-in-out   infinite; }
+
+@keyframes breathe{
+  0%,100% { box-shadow: 0 0 18px color-mix(in oklab,var(--color) 24%,transparent), 0 0 62px color-mix(in oklab,var(--color) 18%,transparent); }
+  50%     { box-shadow: 0 0 28px color-mix(in oklab,var(--color) 34%,transparent), 0 0 110px color-mix(in oklab,var(--color) 24%,transparent); }
+}
+@keyframes pulse{
+  0%   { transform: scale(calc(1 + 0.12 * var(--level))); }
+  50%  { transform: scale(calc(1.04 + 0.22 * var(--level))); }
+  100% { transform: scale(calc(1 + 0.10 * var(--level))); }
+}
+@keyframes glow{
+  0%,100% { box-shadow: 0 0 24px color-mix(in oklab,var(--color) 36%,transparent), 0 0 120px color-mix(in oklab,var(--color) 26%,transparent); }
+  50%     { box-shadow: 0 0 32px color-mix(in oklab,var(--color) 46%,transparent), 0 0 160px color-mix(in oklab,var(--color) 30%,transparent); }
+}
+
+/* Тонкие пульс-кольца на самом шаре */
+.orb::after{
+  content:"";
+  position:absolute; inset:-6px;
+  border-radius:50%;
+  border:2px solid color-mix(in oklab, var(--color) 52%, transparent);
+  opacity:0; transform: scale(0.92);
+  pointer-events:none;
+}
+.orb.listening::after{ animation: ring 1.25s ease-out infinite; }
+@keyframes ring{
+  0%   { opacity:.5; transform: scale(0.92); }
+  100% { opacity:0;  transform: scale(1.20); }
+}
+
+/* Текст */
+.hint{ color: var(--muted); font-weight:650; letter-spacing:.2px; text-align:center; }
+.stt-preview{
+  max-width: min(90vw, 760px);
+  color:#eef3ff; opacity:.96; text-align:center;
+  font-size: clamp(14px, 2.6vw, 18px);
+}
+.answer{ color:#e3e9ff; opacity:.96; text-align:center; min-height: 1.4em; }
+
+/* Уважение к reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .orb{ animation: none!important; transition: none!important; }
+  #bg-waves{ display:none; }
+}

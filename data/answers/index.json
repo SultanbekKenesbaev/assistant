@@ -1,0 +1,60 @@
+{
+  "default_audio": "static/audio/default_not_found.mp3",
+  "items": [
+    {
+      "tag": "greet_general",
+      "keys": ["сәлем", "сәлеметсіз бе", "қалайсың", "қалай", "ассалаумағалейкум", "салам"],
+      "audio": "static/audio/greet_general.mp3"
+    },
+    {
+      "tag": "who_are_you",
+      "keys": ["сен кімсің", "кімсің", "кімсең", "хурлиман кім", "хурлиман кім өзі", "кім екен", "өзің туралы айт", "өзіңді таныстыр"],
+      "audio": "static/audio/who_are_you.mp3"
+    },
+    {
+      "tag": "nukus_overview",
+      "keys": ["нөкіс ауданы туралы", "нөкіс туралы қысқа", "нөкіс ауданы жөнінде", "аудан туралы айтып бер"],
+      "audio": "static/audio/01_overview.mp3"
+    },
+    {
+      "tag": "nukus_borders",
+      "keys": ["нөкіс ауданының шекарасы", "қай аудандармен шектеседі", "нөкіс ауданы шекаралары"],
+      "audio": "static/audio/02_borders.mp3"
+    },
+    {
+      "tag": "nukus_area",
+      "keys": ["нөкіс ауданының аумағы", "жер аумағы", "жалпы аумағы", "аумағы қанша"],
+      "audio": "static/audio/03_area.mp3"
+    },
+    {
+      "tag": "nukus_population_total",
+      "keys": ["халық саны", "нөкіс ауданының халқы", "қанша адам тұрады", "нөкіс ауданындағы халық саны"],
+      "audio": "static/audio/04_population_total.mp3"
+    },
+    {
+      "tag": "nukus_population_split",
+      "keys": ["қала мен ауыл бөлінісі", "қала ауыл халқы", "қалада және ауылда қанша"],
+      "audio": "static/audio/05_population_split.mp3"
+    },
+    {
+      "tag": "nukus_admin_units",
+      "keys": ["әкімшілік бөлінісі", "елді мекендер", "махаллалар тізімі", "нөкіс ауданы елді мекендері"],
+      "audio": "static/audio/06_admin_units.mp3"
+    },
+    {
+      "tag": "nukus_center",
+      "keys": ["аудан орталығы", "орталығы қайда", "ауданның орталығы"],
+      "audio": "static/audio/07_center.mp3"
+    },
+    {
+      "tag": "nukus_infrastructure",
+      "keys": ["инфрақұрылымы", "мектептер аурухана поликлиника", "денсаулық сақтау және білім беру"],
+      "audio": "static/audio/08_infrastructure.mp3"
+    },
+    {
+      "tag": "nukus_economy",
+      "keys": ["экономикалық негіз", "экономикасы қай сала", "нөкіс ауданы экономикасы"],
+      "audio": "static/audio/09_economy.mp3"
+    }
+  ]
+}

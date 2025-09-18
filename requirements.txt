@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+requests
+chromadb==0.4.24
+sentence-transformers
+numpy<2
+pydantic>=2
+python-dotenv
+pypdf
+faster-whisper
+vosk
+uvicorn[standard]
+jinja2
+pydub

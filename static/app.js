@@ -1,5 +1,5 @@
 (() => {
-  const WAKE_WORDS = ["ассистент", "асистент", "Ассистент","асси стент",];
+  const WAKE_WORDS = ["көмекші", "көмекши", "көмек ші","көмек ши"];
   const AWAKE_TIMEOUT_MS = 10000;
   const VAD_HANG_MS = 500;
   const ENERGY_THR = 0.012;

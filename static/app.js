@@ -259,7 +259,7 @@
     };
     requestAnimationFrame(loop);
 
-    setStatus('Tıńlaw: aytıń "Hurliman" hám súrawıñızdı.');
+    setStatus('Tıńlaw: aytıń "көмекші" hám súrawıñızdı.');
     triggerRipple(); // стартовый сплэш
   }
 
@@ -278,7 +278,7 @@
 
     if (!awake && hasWake) {
       awake = true; awakeUntil = Date.now() + AWAKE_TIMEOUT_MS;
-      const q = sttText.replace(/^(хурлиман|hurliman|khurliman|qurliman|hurli)\s*/i, "").trim();
+      const q = sttText.replace(/^(көмекші|көмекши|көмек ші|көмек ши)\s*/i, "").trim();
       if (q) { await askText(q); awake=false; } else { await askText("__wake_ack__"); awake=false; }
       return;
     }
